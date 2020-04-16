@@ -7,19 +7,14 @@ namespace WolfAndSheep
         static void Main(string[] args)
         {
             //Inicialização de variáveis
-            Instructions();
             string[,] board = new string[8,8];
             string playerinput = "";
             int turns;
             turns = 0;
 
-            for (int i = 0; i < 8; i++)
-            {
-                for(int j = 0; j < 8; j++)
-                {
-                    board[i,j] = "|__|";
-                }
-            }
+            Instructions();
+
+            BoardInit(out board);
 
             // Por as ovelas "X" nas suas posições iniciais
             int X1x = 7, X1y = 0;
@@ -31,19 +26,12 @@ namespace WolfAndSheep
             board[X3x,X3y] = "|X3|";
             board[X4x,X4y] = "|X4|";
 
-            // Output do jogo (Tabuleiro)
-            for (int i = 0; i < 8; i++)
-            {
-                for(int j = 0; j < 8; j++)
-                {
-                    Console.Write("{0}", board[i,j]);
-                }
-                Console.WriteLine("");
-            }
+            
 
             // Exemplo de move forwar de uma ovelha 
             while (playerinput != "exit")
             {
+                PrintBoard(board);
                 playerinput = Console.ReadLine();
 
                 if (playerinput == "f")
@@ -66,15 +54,6 @@ namespace WolfAndSheep
                     X1x -= 1;
                     X1y -= 1;
                 }
-
-                for (int i = 0; i < 8; i++)
-                {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        Console.Write("{0}", board[i, j]);
-                    }
-                    Console.WriteLine("");
-                }
             }
         }
         private static void Instructions()
@@ -82,6 +61,32 @@ namespace WolfAndSheep
             Console.WriteLine("O objetivo do lobo é chegar a um dos quadrados originais das ovelhas O objetivo das ovelhas é bloquear o lobo, impedindo-o de chegar a um dos seus quadrados originais. As ovelhas movem-se na diagonal e para a frente, um quadrado por turno.");
             Console.WriteLine("O lobo move-se na diagonal, um quadrado por turno, não só para a frente como as ovelhas, como também para trás. Isto é, o lobo pode recuar, as ovelhas não. O lobo move-se sempre primeiro. No turno das ovelhas, só é possível mover uma ovelha.");
             Console.WriteLine("As peças só se podem mover para quadrados escuros vazios. O lobo vence se chegar a um dos quadrados originais das ovelhas. As ovelhas vencem se bloquearem o lobo de modo a que o mesmo não se consiga mover");
+        }
+
+        //Input dos quadrados do tabuleiro no array multidimensional 
+        private static void BoardInit(out string[,] array)
+        {
+            array = new string[8,8];
+            for (int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    array[i,j] = "|__|";
+                }
+            }
+        }
+
+        // Output do tabuleiro
+        private static void PrintBoard(string[,] board)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    Console.Write("{0}", board[i,j]);
+                }
+                Console.WriteLine("");
+            }
         }
     }
 }
