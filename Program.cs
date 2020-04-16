@@ -20,7 +20,9 @@ namespace WolfAndSheep
             board[7,2] = "|X|";
             board[7,4] = "|X|";
             board[7,6] = "|X|";
+            board[0,3] = "|0|";
 
+            // Draw the board
             for (int i = 0; i < 8; i++)
             {
                 for(int j = 0; j < 8; j++)
