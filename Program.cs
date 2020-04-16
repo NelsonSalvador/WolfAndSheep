@@ -24,6 +24,7 @@ namespace WolfAndSheep
             board[7,2] = "|X|";
             board[7,4] = "|X|";
             board[7,6] = "|X|";
+
            
 
             // Output do jogo (Tabuleiro)
