@@ -123,27 +123,7 @@ namespace WolfAndSheep
             Console.WriteLine("");
         }
 
-        //Input dos quadrados do tabuleiro no array multidimensional 
-        /*private static void BoardInit(out string[,] array)
-        {
-            array = new string[8,8];
-            for (int i = 0; i < 8; i++)
-            {
-                for(int j = 0; j < 8; j++)
-                {
-                    if( j == 7)
-                    {
-                        Console.Write("| {0} |", array[i, j]);
-                    }
-                    else
-                    {
-                        Console.Write("| {0} ", array[i, j]);
-                    }
-                }
-                Console.WriteLine("");
-            }
-        }*/
-
+        
         // Output do tabuleiro
         private static void PrintBoard(string[,] board)
         {
