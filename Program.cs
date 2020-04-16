@@ -26,20 +26,21 @@ namespace WolfAndSheep
             board[X3x,X3y] = "|X3|";
             board[X4x,X4y] = "|X4|";
 
-            
+            board[0, 1] = "|1_|";
+            board[0, 3] = "|2_|";
+            board[0, 5] = "|3_|";
+            board[0, 7] = "|4_|";
+
+            PrintBoard(board);
+            WolfInit(out board);
 
             // Exemplo de move forwar de uma ovelha 
             while (playerinput != "exit")
             {
                 PrintBoard(board);
-                playerinput = Console.ReadLine();
 
-                if (playerinput == "f")
-                {
-                    board[X1x, X1y] = "|__|";
-                    board[X1x - 1, X1y] = "|X1|";
-                    X1x -= 1;
-                }
+                playerinput = Console.ReadLine();
+                
                 if (playerinput == "d")
                 {
                     board[X1x, X1y] = "|__|";
@@ -86,6 +87,35 @@ namespace WolfAndSheep
                     Console.Write("{0}", board[i,j]);
                 }
                 Console.WriteLine("");
+            }
+        }
+
+        private static void WolfInit(out string[,] array)
+        {
+            array = new string[8,8];
+            BoardInit(out array);
+            Console.WriteLine("Wolf Start House (1, 2, 3 or 4): ");
+            int Start = Convert.ToInt32(Console.ReadLine());
+
+            array[7, 0] = "|X1|";
+            array[7, 2] = "|X2|";
+            array[7, 4] = "|X3|";
+            array[7, 6] = "|X4|";
+
+            switch (Start)
+            {
+                case 1:
+                    array[0,1] = "|OO|";
+                    break;
+                case 2:
+                    array[0,3] = "|OO|";
+                    break;
+                case 3:
+                    array[0,5] = "|OO|";
+                    break;
+                case 4:
+                    array[0,7] = "|OO|";
+                    break;
             }
         }
     }
