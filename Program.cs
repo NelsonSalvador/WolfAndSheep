@@ -26,17 +26,23 @@ namespace WolfAndSheep
             board[X3x,X3y] = "|X3|";
             board[X4x,X4y] = "|X4|";
 
+            board[0, 1] = "|1_|";
+            board[0, 3] = "|2_|";
+            board[0, 5] = "|3_|";
+            board[0, 7] = "|4_|";
+
+            PrintBoard(board);
+            WolfInit(out board);
+
             // Exemplo de move forwar de uma ovelha 
             do 
             {
-
                 if (turns %2 == 0)
                 {
                     //wolf's turn
                     Console.WriteLine("Turno do Lobo");
                     PrintBoard(board);
                     playerinput = Console.ReadLine();
-                    turns += 1;
                 }
                 else
                 {
@@ -64,16 +70,56 @@ namespace WolfAndSheep
                         X1x -= 1;
                         X1y -= 1;
                     }
-                    turns += 1;
                 }
+                turns += 1;
 
             }while (playerinput != "sair");
         }
         private static void Instructions()
         {
-            Console.WriteLine("O objetivo do lobo é chegar a um dos quadrados originais das ovelhas O objetivo das ovelhas é bloquear o lobo, impedindo-o de chegar a um dos seus quadrados originais. As ovelhas movem-se na diagonal e para a frente, um quadrado por turno.");
-            Console.WriteLine("O lobo move-se na diagonal, um quadrado por turno, não só para a frente como as ovelhas, como também para trás. Isto é, o lobo pode recuar, as ovelhas não. O lobo move-se sempre primeiro. No turno das ovelhas, só é possível mover uma ovelha.");
-            Console.WriteLine("As peças só se podem mover para quadrados escuros vazios. O lobo vence se chegar a um dos quadrados originais das ovelhas. As ovelhas vencem se bloquearem o lobo de modo a que o mesmo não se consiga mover");
+            Console.WriteLine("");
+            Console.WriteLine("Regras:");
+            Console.WriteLine("");
+
+            Console.Write("1: O objetivo do lobo e chegar a um dos quadrados ");
+            Console.Write("originais das ovelhas. ");
+            Console.WriteLine("");
+
+            Console.Write("2: O objetivo das ovelhas e ");
+            Console.Write("bloquear o lobo, impedindo-o de chegar a um dos ");
+            Console.Write("seus quadrados originais. ");
+            Console.WriteLine("");
+
+            Console.Write("3: As ovelhas movem-se na ");
+            Console.Write("diagonal e para a frente, um quadrado por turno.");
+            Console.WriteLine("");
+            
+            Console.Write("4: O lobo move-se na diagonal, um quadrado por ");
+            Console.Write("turno, nao so para a frente como as ovelhas, ");
+            Console.Write("como tambem para tras. ");
+            Console.WriteLine("");
+
+            Console.Write("   Isto e, o lobo pode recuar, as ovelhas nao. ");
+            Console.WriteLine("");
+
+            Console.Write("5: O lobo move-se sempre primeiro. No turno das ");
+            Console.WriteLine("");
+
+            Console.Write("6: No turno das ");
+            Console.Write("ovelhas, so e possivel mover uma ovelha.");
+            Console.WriteLine("");
+            
+            Console.Write("7: As pecas so se podem mover para quadrados ");
+            Console.Write("escuros vazios.");
+            Console.WriteLine("");
+
+            Console.Write("8: O lobo vence se chegar a um dos ");
+            Console.Write("quadrados originais das ovelhas. ");
+            Console.WriteLine("");
+
+            Console.Write("9: As ovelhas vencem se bloquearem o lobo de modo");
+            Console.Write(" a que o mesmo não se consiga mover");
+            Console.WriteLine("");
         }
 
         //Input dos quadrados do tabuleiro no array multidimensional
@@ -111,6 +157,35 @@ namespace WolfAndSheep
                     Console.Write("{0}", board[i,j]);
                 }
                 Console.WriteLine("");
+            }
+        }
+
+        private static void WolfInit(out string[,] array)
+        {
+            array = new string[8,8];
+            BoardInit(out array);
+            Console.WriteLine("Wolf Start House (1, 2, 3 or 4): ");
+            int Start = Convert.ToInt32(Console.ReadLine());
+
+            array[7, 0] = "|X1|";
+            array[7, 2] = "|X2|";
+            array[7, 4] = "|X3|";
+            array[7, 6] = "|X4|";
+
+            switch (Start)
+            {
+                case 1:
+                    array[0,1] = "|OO|";
+                    break;
+                case 2:
+                    array[0,3] = "|OO|";
+                    break;
+                case 3:
+                    array[0,5] = "|OO|";
+                    break;
+                case 4:
+                    array[0,7] = "|OO|";
+                    break;
             }
         }
     }
