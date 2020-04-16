@@ -58,9 +58,49 @@ namespace WolfAndSheep
         }
         private static void Instructions()
         {
-            Console.WriteLine("O objetivo do lobo é chegar a um dos quadrados originais das ovelhas O objetivo das ovelhas é bloquear o lobo, impedindo-o de chegar a um dos seus quadrados originais. As ovelhas movem-se na diagonal e para a frente, um quadrado por turno.");
-            Console.WriteLine("O lobo move-se na diagonal, um quadrado por turno, não só para a frente como as ovelhas, como também para trás. Isto é, o lobo pode recuar, as ovelhas não. O lobo move-se sempre primeiro. No turno das ovelhas, só é possível mover uma ovelha.");
-            Console.WriteLine("As peças só se podem mover para quadrados escuros vazios. O lobo vence se chegar a um dos quadrados originais das ovelhas. As ovelhas vencem se bloquearem o lobo de modo a que o mesmo não se consiga mover");
+            Console.WriteLine("");
+            Console.WriteLine("Regras:");
+            Console.WriteLine("");
+
+            Console.Write("1: O objetivo do lobo e chegar a um dos quadrados ");
+            Console.Write("originais das ovelhas. ");
+            Console.WriteLine("");
+
+            Console.Write("2: O objetivo das ovelhas e ");
+            Console.Write("bloquear o lobo, impedindo-o de chegar a um dos ");
+            Console.Write("seus quadrados originais. ");
+            Console.WriteLine("");
+
+            Console.Write("3: As ovelhas movem-se na ");
+            Console.Write("diagonal e para a frente, um quadrado por turno.");
+            Console.WriteLine("");
+            
+            Console.Write("4: O lobo move-se na diagonal, um quadrado por ");
+            Console.Write("turno, nao so para a frente como as ovelhas, ");
+            Console.Write("como tambem para tras. ");
+            Console.WriteLine("");
+
+            Console.Write("   Isto e, o lobo pode recuar, as ovelhas nao. ");
+            Console.WriteLine("");
+
+            Console.Write("5: O lobo move-se sempre primeiro. No turno das ");
+            Console.WriteLine("");
+
+            Console.Write("6: No turno das ");
+            Console.Write("ovelhas, so e possivel mover uma ovelha.");
+            Console.WriteLine("");
+            
+            Console.Write("7: As pecas so se podem mover para quadrados ");
+            Console.Write("escuros vazios.");
+            Console.WriteLine("");
+
+            Console.Write("8: O lobo vence se chegar a um dos ");
+            Console.Write("quadrados originais das ovelhas. ");
+            Console.WriteLine("");
+
+            Console.Write("9: As ovelhas vencem se bloquearem o lobo de modo");
+            Console.Write(" a que o mesmo não se consiga mover");
+            Console.WriteLine("");
         }
 
         //Input dos quadrados do tabuleiro no array multidimensional 
