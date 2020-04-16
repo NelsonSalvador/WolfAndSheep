@@ -28,6 +28,9 @@ namespace WolfAndSheep
             int X2x = 7, X2y = 2;
             int X3x = 7, X3y = 4;
             int X4x = 7, X4y = 6;
+
+            int[] W = {0, 0};
+
             board[7,X1y] = "S";
             board[7,X2y] = "S";
             board[7,X3y] = "S";
@@ -38,8 +41,9 @@ namespace WolfAndSheep
             board[0, 5] = "3";
             board[0, 7] = "4";
             PrintBoard(board);
-            int wolfPlace = WolfInit();
-            board[0, wolfPlace] = "W";
+
+            W[1] = WolfInit();
+            board[W[0], W[1]] = "W";
 
             for (int i = 0; i < 8; i++)
             {
@@ -60,8 +64,10 @@ namespace WolfAndSheep
                 {
                     //wolf's turn
                     Console.WriteLine("Turno do Lobo");
+
                     PrintBoard(board);
-                    playerinput = Console.ReadLine();
+
+                    WolfMove(board, W);
                 }
                 else
                 {
@@ -69,12 +75,7 @@ namespace WolfAndSheep
                     PrintBoard(board);
                     playerinput = Console.ReadLine();
 
-                    if (playerinput == "f")
-                    {
-                        board[X1x, X1y] = "|__|";
-                        board[X1x - 1, X1y] = "|X1|";
-                        X1x -= 1;
-                    }
+
                     if (playerinput == "d")
                     {
                         board[X1x, X1y] = "|__|";
@@ -192,6 +193,61 @@ namespace WolfAndSheep
                     return 7; 
             }
             return 0;
+        }
+
+        /// <summary>
+        /// Metodo para os movimentos do lobo, recebe o input do utilizador para a nova posição do lobo
+        /// </summary>
+        /// <param name="board"></param>
+        /// Recebe a board e põe o lobo na sua nova posição
+        /// <param name="W"></param>
+        /// Recebe a posição do lobo e atualiza para a nova posição
+        private static void WolfMove(string[,] board, int[] W)
+        {
+            Console.WriteLine("Cima/Esquerda: q | Cima/Direita: e | Baixo/Esquerda: a | Baixo/Direita: d ");
+            string playerinput = Console.ReadLine();
+            bool ValidAnswer = false;
+            do 
+            {
+                if (playerinput == "e")
+                {
+                    board[W[0], W[1]] = " ";
+                    board[W[0] - 1, W[1] + 1] = "W";
+                    W[0] -= 1;
+                    W[1] += 1;
+                    ValidAnswer = true;
+                }
+                else if (playerinput == "q")
+                {
+                    board[W[0], W[1]] = " ";
+                    board[W[0] - 1, W[1] - 1] = "W";
+                    W[0] -= 1;
+                    W[1] -= 1;
+                    ValidAnswer = true;
+                }
+
+                else if (playerinput == "d")
+                {
+                    board[W[0], W[1]] = " ";
+                    board[W[0] + 1, W[1] + 1] = "W";
+                    W[0] += 1;
+                    W[1] += 1;
+                    ValidAnswer = true;
+                }
+
+                else if (playerinput == "a")
+                {
+                    board[W[0], W[1]] = " ";
+                    board[W[0] + 1, W[1] - 1] = "W";
+                    W[0] += 1;
+                    W[1] -= 1;
+                    ValidAnswer = true;
+                }
+                else
+                {
+                    Console.WriteLine("Opção inválida");
+                }
+            }while(ValidAnswer == false);
         }
 
     }
