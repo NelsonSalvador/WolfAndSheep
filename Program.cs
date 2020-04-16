@@ -8,6 +8,7 @@ namespace WolfAndSheep
         {
             //Inicialização de variáveis
             string[,] board = new string[8,8];
+            int[,] ovelhaPos = new int[4,2];
             string playerinput = "";
             int turns;
             turns = 0;
@@ -24,14 +25,19 @@ namespace WolfAndSheep
                     board[i, j] = " ";
                 }
             }
-            int X1x = 7, X1y = 0;
-            int X2x = 7, X2y = 2;
-            int X3x = 7, X3y = 4;
-            int X4x = 7, X4y = 6;
-            board[7,X1y] = "S";
-            board[7,X2y] = "S";
-            board[7,X3y] = "S";
-            board[7,X4y] = "S";
+            ovelhaPos[0,0] = 7;
+            ovelhaPos[1,0] = 7;
+            ovelhaPos[2,0] = 7;
+            ovelhaPos[3,0] = 7;
+            
+            ovelhaPos[0,1] = 0;
+            ovelhaPos[1,1] = 2;
+            ovelhaPos[2,1] = 4;
+            ovelhaPos[3,1] = 6;
+            board[ovelhaPos[0,0], ovelhaPos[0,1]] = "S";
+            board[ovelhaPos[1,0], ovelhaPos[1,1]] = "S";
+            board[ovelhaPos[2,0], ovelhaPos[2,1]] = "S";
+            board[ovelhaPos[3,0], ovelhaPos[3,1]] = "S";
 
             board[0, 1] = "1";
             board[0, 3] = "2";
@@ -67,28 +73,7 @@ namespace WolfAndSheep
                 {
                     Console.WriteLine("Turno das Ovelhas");
                     PrintBoard(board);
-                    playerinput = Console.ReadLine();
-
-                    if (playerinput == "f")
-                    {
-                        board[X1x, X1y] = "|__|";
-                        board[X1x - 1, X1y] = "|X1|";
-                        X1x -= 1;
-                    }
-                    if (playerinput == "d")
-                    {
-                        board[X1x, X1y] = "|__|";
-                        board[X1x - 1, X1y + 1] = "|X1|";
-                        X1x -= 1;
-                        X1y += 1;
-                    }
-                    if (playerinput == "e")
-                    {
-                        board[X1x, X1y] = "|__|";
-                        board[X1x - 1, X1y - 1] = "|X1|";
-                        X1x -= 1;
-                        X1y -= 1;
-                    }
+                    sheepMove(board, ovelhaPos);
                 }
                 turns += 1;
 
@@ -192,6 +177,43 @@ namespace WolfAndSheep
                     return 7; 
             }
             return 0;
+        }
+
+        private static void sheepMove(string[,] board, int[,] ovelhaPos){
+
+            string playerinput = "";
+            bool validanswer = false;
+
+            Console.WriteLine("Qual ovelha se vai mexer?");
+            int ovelha = Convert.ToInt32(Console.ReadLine());
+            ovelha -= 1;
+            do{
+                Console.WriteLine("Para onde se vai mexer a ovelha?");
+                playerinput = Console.ReadLine();
+
+                if (playerinput == "q")
+                {
+                    board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = " ";
+                    board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]-1] = "S";
+                    ovelhaPos[ovelha,0] -= 1;
+                    ovelhaPos[ovelha,1] -= 1;
+                    validanswer = true;
+                }
+                if (playerinput == "e")
+                {
+                    board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = " ";
+                    board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]+1] = "S";
+                    ovelhaPos[ovelha,0] -= 1;
+                    ovelhaPos[ovelha,1] += 1;
+                    validanswer = true;
+                }
+                else
+                {
+                    Console.WriteLine("Opção inválida");
+                }
+            }
+            while(validanswer == false);
+
         }
 
     }
