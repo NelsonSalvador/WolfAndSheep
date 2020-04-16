@@ -25,6 +25,7 @@ namespace WolfAndSheep
                     board[i, j] = " ";
                 }
             }
+
             ovelhaPos[0,0] = 7;
             ovelhaPos[1,0] = 7;
             ovelhaPos[2,0] = 7;
@@ -39,13 +40,18 @@ namespace WolfAndSheep
             board[ovelhaPos[2,0], ovelhaPos[2,1]] = "S";
             board[ovelhaPos[3,0], ovelhaPos[3,1]] = "S";
 
+
+            int[] W = {0, 0};
+
+
             board[0, 1] = "1";
             board[0, 3] = "2";
             board[0, 5] = "3";
             board[0, 7] = "4";
             PrintBoard(board);
-            int wolfPlace = WolfInit();
-            board[0, wolfPlace] = "W";
+
+            W[1] = WolfInit();
+            board[W[0], W[1]] = "W";
 
             for (int i = 0; i < 8; i++)
             {
@@ -66,14 +72,18 @@ namespace WolfAndSheep
                 {
                     //wolf's turn
                     Console.WriteLine("Turno do Lobo");
+
                     PrintBoard(board);
-                    playerinput = Console.ReadLine();
+
+                    WolfMove(board, W);
                 }
                 else
                 {
                     Console.WriteLine("Turno das Ovelhas");
                     PrintBoard(board);
+
                     sheepMove(board, ovelhaPos);
+
                 }
                 turns += 1;
 
@@ -179,6 +189,7 @@ namespace WolfAndSheep
             return 0;
         }
 
+
         private static void sheepMove(string[,] board, int[,] ovelhaPos){
 
             string playerinput = "";
@@ -213,6 +224,59 @@ namespace WolfAndSheep
                 }
             }
             while(validanswer == false);
+        }
+
+
+        /// <summary>
+        /// Metodo para os movimentos do lobo, recebe o input do utilizador para a nova posição do lobo
+        /// </summary>
+        /// <param name="board"></param>
+        /// Recebe a board e põe o lobo na sua nova posição
+        /// <param name="W"></param>
+        /// Recebe a posição do lobo e atualiza para a nova posição
+        private static void WolfMove(string[,] board, int[] W)
+        {
+            Console.WriteLine("Cima/Esquerda: q | Cima/Direita: e | Baixo/Esquerda: a | Baixo/Direita: d ");
+            string playerinput = Console.ReadLine();
+            bool ValidAnswer = false;
+            do 
+            {
+                if (playerinput == "e")
+                {
+                    board[W[0], W[1]] = " ";
+                    board[W[0] - 1, W[1] + 1] = "W";
+                    W[0] -= 1;
+                    W[1] += 1;
+                    ValidAnswer = true;
+                }
+                else if (playerinput == "q")
+                {
+                    board[W[0], W[1]] = " ";
+                    board[W[0] - 1, W[1] - 1] = "W";
+                    W[0] -= 1;
+                    W[1] -= 1;
+                    ValidAnswer = true;
+                }
+
+                else if (playerinput == "d")
+                {
+                    board[W[0], W[1]] = " ";
+                    board[W[0] + 1, W[1] + 1] = "W";
+                    W[0] += 1;
+                    W[1] += 1;
+                    ValidAnswer = true;
+                }
+
+                else if (playerinput == "a")
+                {
+                    board[W[0], W[1]] = " ";
+                    board[W[0] + 1, W[1] - 1] = "W";
+                    W[0] += 1;
+                    W[1] -= 1;
+                    ValidAnswer = true;
+
+            }
+            while(ValidAnswer == false);
 
         }
 
