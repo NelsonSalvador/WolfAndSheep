@@ -83,10 +83,58 @@ namespace Metodo
                             Console.ForegroundColor = ConsoleColor.Black;
                         }
                     }
-                    Console.Write(" {0} ", board[i,j]);
+                    Console.Write("       ");
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                }
+                Console.WriteLine("");
+
+                for(int j = 0; j < 8; j++)
+                {
+                    if (i == 0 || i == 2 || i == 4 || i == 6)
+                    {
+                        if (j == 0 || j == 2 || j == 4 || j == 6)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                    }
+                    else
+                    {
+                        if (j == 1 || j == 3 || j == 5 || j == 7)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                    }
+                    Console.Write("  {0}   ", board[i,j]);
                     Console.BackgroundColor = ConsoleColor.DarkGray;
                     Console.ForegroundColor = ConsoleColor.Black;
                         
+                }
+                Console.WriteLine("");
+
+                for(int j = 0; j < 8; j++)
+                {
+                    if (i == 0 || i == 2 || i == 4 || i == 6)
+                    {
+                        if (j == 0 || j == 2 || j == 4 || j == 6)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                    }
+                    else
+                    {
+                        if (j == 1 || j == 3 || j == 5 || j == 7)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                    }
+                    Console.Write("       ");
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.Black;
                 }
                 Console.WriteLine("");
             }
