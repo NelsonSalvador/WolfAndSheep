@@ -140,40 +140,40 @@ namespace WolfAndSheep
             int ovelha;
             string escolhainicial;
             string msg;
-
-            do
+            do 
             {
-                Console.WriteLine("Qual ovelha se vai mexer?");
-                escolhainicial = Console.ReadLine();
-                if (int.TryParse(escolhainicial, out ovelha))
+                do
                 {
-                    
-                    ovelha -= 1;
-
-                    if (ovelha == 0 || ovelha == 1 || ovelha == 2 || ovelha == 3)
+                    Console.WriteLine("Qual ovelha se vai mexer?");
+                    escolhainicial = Console.ReadLine();
+                    if (int.TryParse(escolhainicial, out ovelha))
                     {
-                        validanswer = true;
+                        
+                        ovelha -= 1;
+
+                        if (ovelha == 0 || ovelha == 1 || ovelha == 2 || ovelha == 3)
+                        {
+                            validanswer = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Opcao invalida");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Opcao invalida");
+                        if (escolhainicial == "sair")
+                        {
+                            Metodo.Ins.Sair();
+                        }
                     }
-                }
-                else
-                {
-                    if (escolhainicial == "sair")
-                    {
-                        Metodo.Ins.Sair();
-                    }
-                }
+                    
+                } while(validanswer == false);
+                msg = "S"+ (ovelha + 1).ToString();
                 
-            } while(validanswer == false);
-            msg = "S"+ (ovelha + 1).ToString();
-            
-            validanswer = false;
+                validanswer = false;
 
-            do
-            {
+                
                 Console.WriteLine("Para onde se vai mexer a ovelha?");
                 playerinput = Console.ReadLine();
 
@@ -201,8 +201,7 @@ namespace WolfAndSheep
                         ovelhaPos[ovelha,0] -= 1;
                         ovelhaPos[ovelha,1] += 1;
                         validanswer = true;
-                    }
-                    
+                    }                    
                 }
                 else if (playerinput == "sair")
                 {
@@ -214,6 +213,7 @@ namespace WolfAndSheep
                 }
             }
             while(validanswer == false);
+           
         }
 
 
