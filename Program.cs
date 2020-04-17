@@ -17,7 +17,7 @@ namespace WolfAndSheep
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    board[i, j] = " ";
+                    board[i, j] = "  ";
                 }
             }
 
@@ -30,31 +30,31 @@ namespace WolfAndSheep
             ovelhaPos[1,1] = 2;
             ovelhaPos[2,1] = 4;
             ovelhaPos[3,1] = 6;
-            board[ovelhaPos[0,0], ovelhaPos[0,1]] = "S";
-            board[ovelhaPos[1,0], ovelhaPos[1,1]] = "S";
-            board[ovelhaPos[2,0], ovelhaPos[2,1]] = "S";
-            board[ovelhaPos[3,0], ovelhaPos[3,1]] = "S";
+            board[ovelhaPos[0,0], ovelhaPos[0,1]] = "S1";
+            board[ovelhaPos[1,0], ovelhaPos[1,1]] = "S2";
+            board[ovelhaPos[2,0], ovelhaPos[2,1]] = "S3";
+            board[ovelhaPos[3,0], ovelhaPos[3,1]] = "S4";
 
 
             int[] W = {0, 0};
 
 
-            board[0, 1] = "1";
-            board[0, 3] = "2";
-            board[0, 5] = "3";
-            board[0, 7] = "4";
+            board[0, 1] = "01";
+            board[0, 3] = "02";
+            board[0, 5] = "03";
+            board[0, 7] = "04";
             Metodo.Ins.PrintBoard(board);
 
             W[1] = WolfInit();
-            board[W[0], W[1]] = "W";
+            board[W[0], W[1]] = "VV";
 
             for (int i = 0; i < 8; i++)
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    if ( board[i, j] != "W" && board[i, j] != "S" )
+                    if ( board[i, j] != "VV" && board[i, j] != "S1" && board[i, j] != "S2" && board[i, j] != "S3" && board[i, j] != "S4" )
                     {
-                        board[i, j] = " ";
+                        board[i, j] = "  ";
                     }
                 }
             }
@@ -64,15 +64,15 @@ namespace WolfAndSheep
                 if (turns %2 == 0)
                 {
                     //wolf's turn
-                    Console.WriteLine("Turno do Lobo");
                     Metodo.Ins.PrintBoard(board);
+                    Console.WriteLine("Turno do Lobo");
 
                     WolfMove(board, W, ovelhaPos);
                 }
                 else
                 {
-                    Console.WriteLine("Turno das Ovelhas");
                     Metodo.Ins.PrintBoard(board);
+                    Console.WriteLine("Turno das Ovelhas");
 
                     sheepMove(board, ovelhaPos, W);
 
@@ -139,12 +139,15 @@ namespace WolfAndSheep
             int move;
             int ovelha;
             string escolhainicial;
+            string msg;
+
             do
             {
                 Console.WriteLine("Qual ovelha se vai mexer?");
                 escolhainicial = Console.ReadLine();
                 if (int.TryParse(escolhainicial, out ovelha))
                 {
+                    
                     ovelha -= 1;
 
                     if (ovelha == 0 || ovelha == 1 || ovelha == 2 || ovelha == 3)
@@ -165,6 +168,7 @@ namespace WolfAndSheep
                 }
                 
             } while(validanswer == false);
+            msg = "S"+ (ovelha + 1).ToString();
             
             validanswer = false;
 
@@ -179,8 +183,8 @@ namespace WolfAndSheep
 
                     if (move == 1)
                     {
-                        board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = " ";
-                        board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]-1] = "S";
+                        board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = "  ";
+                        board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]-1] = msg;
                         ovelhaPos[ovelha,0] -= 1;
                         ovelhaPos[ovelha,1] -= 1;
                         validanswer = true;
@@ -192,8 +196,8 @@ namespace WolfAndSheep
 
                     if (move == 1)
                     {
-                        board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = " ";
-                        board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]+1] = "S";
+                        board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = "  ";
+                        board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]+1] =  msg;
                         ovelhaPos[ovelha,0] -= 1;
                         ovelhaPos[ovelha,1] += 1;
                         validanswer = true;
@@ -234,8 +238,8 @@ namespace WolfAndSheep
 
                     if(Move == 1)
                     {
-                        board[W[0], W[1]] = " ";
-                        board[W[0] - 1, W[1] + 1] = "W";
+                        board[W[0], W[1]] = "  ";
+                        board[W[0] - 1, W[1] + 1] = "VV";
                         W[0] -= 1;
                         W[1] += 1;
                         ValidAnswer = true;
@@ -247,8 +251,8 @@ namespace WolfAndSheep
 
                     if(Move == 1)
                     {
-                        board[W[0], W[1]] = " ";
-                        board[W[0] - 1, W[1] - 1] = "W";
+                        board[W[0], W[1]] = "  ";
+                        board[W[0] - 1, W[1] - 1] = "VV";
                         W[0] -= 1;
                         W[1] -= 1;
                         ValidAnswer = true;
@@ -262,8 +266,8 @@ namespace WolfAndSheep
 
                     if (Move == 1)
                     {
-                        board[W[0], W[1]] = " ";
-                        board[W[0] + 1, W[1] + 1] = "W";
+                        board[W[0], W[1]] = "  ";
+                        board[W[0] + 1, W[1] + 1] = "VV";
                         W[0] += 1;
                         W[1] += 1;
                         ValidAnswer = true;
@@ -277,8 +281,8 @@ namespace WolfAndSheep
 
                     if (Move == 1)
                     {
-                        board[W[0], W[1]] = " ";
-                        board[W[0] + 1, W[1] - 1] = "W";
+                        board[W[0], W[1]] = "  ";
+                        board[W[0] + 1, W[1] - 1] = "VV";
                         W[0] += 1;
                         W[1] -= 1;
                         ValidAnswer = true;
