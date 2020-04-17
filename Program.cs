@@ -182,22 +182,53 @@ namespace WolfAndSheep
 
         private static int WolfInit()
         {
-            //BoardInit(out array);
-            Console.WriteLine("Casa inicial do lobo (1, 2, 3 or 4): ");
-            int Start = Convert.ToInt32(Console.ReadLine());
-
-
-            switch (Start)
+            //BoardInit(out array);      
+            
+            int Start;
+            bool validanswer = false;
+            string escolhainicial;
+            do
             {
-                case 1:
-                    return 1;
-                case 2:
-                    return 3;
-                case 3:
-                    return 5;
-                case 4:
-                    return 7; 
+                Console.WriteLine("Casa inicial do lobo (1, 2, 3 or 4): ");
+                escolhainicial = Console.ReadLine();
+                if (int.TryParse(escolhainicial, out Start))
+                {
+                    switch (Start)
+                    {
+                        
+                        case 1:
+                            validanswer = true;
+                            return 1;
+                        case 2:
+                            validanswer = true;
+                            return 3;
+                        case 3:
+                            validanswer = true;
+                            return 5;
+                        case 4:
+                            validanswer = true;
+                            return 7;
+                        default:
+                            Console.WriteLine("Opcao invalida");
+                            break;
+                        
+                    }
+                }
+                else
+                {
+                    if (escolhainicial == "sair")
+                    {
+                        Sair();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opcao invalida");
+                    }
+                }
+                
             }
+            while(validanswer == false);
+  
             return 0;
         }
 
@@ -207,11 +238,40 @@ namespace WolfAndSheep
 
             string playerinput = "";
             bool validanswer = false;
-            int Move;
+            int move;
 
-            Console.WriteLine("Qual ovelha se vai mexer?");
-            int ovelha = Convert.ToInt32(Console.ReadLine());
-            ovelha -= 1;
+            int ovelha;
+            string escolhainicial;
+            do
+            {
+                Console.WriteLine("Qual ovelha se vai mexer?");
+                escolhainicial = Console.ReadLine();
+                if (int.TryParse(escolhainicial, out ovelha))
+                {
+                    ovelha -= 1;
+
+                    if (ovelha == 0 || ovelha == 1 || ovelha == 2 || ovelha == 3)
+                    {
+                        validanswer = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opcao invalida");
+                    }
+                }
+                else
+                {
+                    if (escolhainicial == "sair")
+                    {
+                        Sair();
+                    }
+                }
+                
+            }
+            while(validanswer == false);
+            
+            validanswer = false;
+
             do
             {
                 Console.WriteLine("Para onde se vai mexer a ovelha?");
@@ -219,9 +279,9 @@ namespace WolfAndSheep
 
                 if (playerinput == "q")
                 {
-                    Move = CanMove(ovelhaPos[ovelha, 0] - 1, ovelhaPos[ovelha,1] - 1 , ovelhaPos, W);
+                    move = CanMove(ovelhaPos[ovelha, 0] - 1, ovelhaPos[ovelha,1] - 1 , ovelhaPos, W);
 
-                    if (Move == 1)
+                    if (move == 1)
                     {
                         board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = " ";
                         board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]-1] = "S";
@@ -230,11 +290,11 @@ namespace WolfAndSheep
                         validanswer = true;
                     }
                 }
-                if (playerinput == "e")
+                else if (playerinput == "e")
                 {
-                    Move = CanMove(ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1] + 1 , ovelhaPos, W);
+                    move = CanMove(ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1] + 1 , ovelhaPos, W);
 
-                    if (Move == 1)
+                    if (move == 1)
                     {
                         board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = " ";
                         board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]+1] = "S";
@@ -244,9 +304,13 @@ namespace WolfAndSheep
                     }
                     
                 }
+                else if (playerinput == "sair")
+                {
+                    Sair();
+                }
                 else
                 {
-                    Console.WriteLine("Opção inválida");
+                    Console.WriteLine("Opcão invalida");
                 }
             }
             while(validanswer == false);
@@ -324,6 +388,14 @@ namespace WolfAndSheep
                         ValidAnswer = true;
                     }
                 }
+                else if (playerinput == "sair")
+                {
+                    Sair();
+                }
+                else
+                {
+                    Console.WriteLine("Opcão invalida");
+                }
                 
             }
             while(ValidAnswer == false);
@@ -357,6 +429,10 @@ namespace WolfAndSheep
             }
             return 1;
         }
-        
+
+        private static void Sair()
+        {
+            System.Environment.Exit(0);
+        }
     }
 }
