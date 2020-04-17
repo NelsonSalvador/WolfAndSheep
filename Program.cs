@@ -72,10 +72,9 @@ namespace WolfAndSheep
                 {
                     //wolf's turn
                     Console.WriteLine("Turno do Lobo");
-
                     PrintBoard(board);
 
-                    WolfMove(board, W);
+                    WolfMove(board, W, ovelhaPos);
                 }
                 else
                 {
@@ -190,7 +189,8 @@ namespace WolfAndSheep
         }
 
 
-        private static void sheepMove(string[,] board, int[,] ovelhaPos){
+        private static void sheepMove(string[,] board, int[,] ovelhaPos)
+        {
 
             string playerinput = "";
             bool validanswer = false;
@@ -198,7 +198,8 @@ namespace WolfAndSheep
             Console.WriteLine("Qual ovelha se vai mexer?");
             int ovelha = Convert.ToInt32(Console.ReadLine());
             ovelha -= 1;
-            do{
+            do
+            {
                 Console.WriteLine("Para onde se vai mexer a ovelha?");
                 playerinput = Console.ReadLine();
 
@@ -234,50 +235,96 @@ namespace WolfAndSheep
         /// Recebe a board e põe o lobo na sua nova posição
         /// <param name="W"></param>
         /// Recebe a posição do lobo e atualiza para a nova posição
-        private static void WolfMove(string[,] board, int[] W)
+        private static void WolfMove(string[,] board, int[] W, int[,] ovelhaPos)
         {
             Console.WriteLine("Cima/Esquerda: q | Cima/Direita: e | Baixo/Esquerda: a | Baixo/Direita: d ");
-            string playerinput = Console.ReadLine();
             bool ValidAnswer = false;
+            int Move;
             do 
             {
+                string playerinput = Console.ReadLine();
                 if (playerinput == "e")
                 {
-                    board[W[0], W[1]] = " ";
-                    board[W[0] - 1, W[1] + 1] = "W";
-                    W[0] -= 1;
-                    W[1] += 1;
-                    ValidAnswer = true;
+                    Move = CanMove(W[0] - 1, W[1] + 1 , ovelhaPos);
+
+                    if(Move == 1)
+                    {
+                        board[W[0], W[1]] = " ";
+                        board[W[0] - 1, W[1] + 1] = "W";
+                        W[0] -= 1;
+                        W[1] += 1;
+                        ValidAnswer = true;
+                    }
                 }
                 else if (playerinput == "q")
                 {
-                    board[W[0], W[1]] = " ";
-                    board[W[0] - 1, W[1] - 1] = "W";
-                    W[0] -= 1;
-                    W[1] -= 1;
-                    ValidAnswer = true;
+                    Move = CanMove(W[0] - 1, W[1] - 1 , ovelhaPos);
+
+                    if(Move == 1)
+                    {
+                        board[W[0], W[1]] = " ";
+                        board[W[0] - 1, W[1] - 1] = "W";
+                        W[0] -= 1;
+                        W[1] -= 1;
+                        ValidAnswer = true;
+                    }
+                    
                 }
 
                 else if (playerinput == "d")
                 {
-                    board[W[0], W[1]] = " ";
-                    board[W[0] + 1, W[1] + 1] = "W";
-                    W[0] += 1;
-                    W[1] += 1;
-                    ValidAnswer = true;
+                    Move = CanMove(W[0] + 1, W[1] + 1 , ovelhaPos);
+
+                    if (Move == 1)
+                    {
+                        board[W[0], W[1]] = " ";
+                        board[W[0] + 1, W[1] + 1] = "W";
+                        W[0] += 1;
+                        W[1] += 1;
+                        ValidAnswer = true;
+                    }
+                    
                 }
 
                 else if (playerinput == "a")
                 {
-                    board[W[0], W[1]] = " ";
-                    board[W[0] + 1, W[1] - 1] = "W";
-                    W[0] += 1;
-                    W[1] -= 1;
-                    ValidAnswer = true;
+                    Move = CanMove(W[0] + 1, W[1] - 1 , ovelhaPos);
 
+                    if (Move == 1)
+                    {
+                        board[W[0], W[1]] = " ";
+                        board[W[0] + 1, W[1] - 1] = "W";
+                        W[0] += 1;
+                        W[1] -= 1;
+                        ValidAnswer = true;
+                    }
+                }
             }
             while(ValidAnswer == false);
+        }
 
+        private static int CanMove(int Wx, int Wy, int[,] ovelhaPos)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (ovelhaPos[i,0] == Wx && ovelhaPos[i,1] == Wy)
+                {
+                    Console.WriteLine("Não se pode mover para essa casa");
+                    return 0;
+                }
+            }
+
+            if (Wx < 0 || Wx > 7)
+            {
+                Console.WriteLine("Não se pode mover para essa casa");
+                return 0;
+            }
+            if (Wy < 0 || Wy > 7)
+            {
+                Console.WriteLine("Não se pode mover para essa casa");
+                return 0;
+            }
+            return 1;
         }
 
     }
