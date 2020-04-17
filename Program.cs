@@ -13,7 +13,7 @@ namespace WolfAndSheep
             int turns;
             turns = 0;
 
-            Instructions();
+            
 
             
 
@@ -144,40 +144,52 @@ namespace WolfAndSheep
         /// </param>
         private static void PrintBoard(string[,] board)
         {
+            Console.Clear();
+            Instructions();
             for (int i = 0; i < 8; i++)
             {
-                Console.WriteLine(" --- --- --- --- --- --- --- ---");
+                Console.BackgroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.Black;
                 for(int j = 0; j < 8; j++)
                 {
-                    if( j == 7)
+                    if (i == 0 || i == 2 || i == 4 || i == 6)
                     {
-                        Console.Write("| {0} |", board[i,j]);
+                        if (j == 0 || j == 2 || j == 4 || j == 6)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
                     }
                     else
                     {
-                        Console.Write("| {0} ", board[i,j]);
+                        if (j == 1 || j == 3 || j == 5 || j == 7)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
                     }
+                    Console.Write(" {0} ", board[i,j]);
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                        
+                
                     
                 }
                 Console.WriteLine("");
-                if ( i == 7)
-                {
-                   Console.WriteLine(" --- --- --- --- --- --- --- ---"); 
-                }
             }
+            Console.ResetColor();
         }
 
         private static int WolfInit()
         {
-            //BoardInit(out array);
-            
+            //BoardInit(out array);      
             
             int Start;
             bool validanswer = false;
             string escolhainicial;
             do
             {
-                Console.WriteLine("Wolf Start House (1, 2, 3 or 4): ");
+                Console.WriteLine("Casa inicial do lobo (1, 2, 3 or 4): ");
                 escolhainicial = Console.ReadLine();
                 if (int.TryParse(escolhainicial, out Start))
                 {
