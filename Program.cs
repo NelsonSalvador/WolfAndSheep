@@ -65,6 +65,22 @@ namespace WolfAndSheep
                 {
                     //wolf's turn
                     Metodo.Ins.PrintBoard(board);
+
+                    int mov1, mov2, mov3, mov4, movTotal;
+
+                    mov1 = CanMove(W[0] - 1, W[1] + 1 , ovelhaPos, W, false);
+                    mov2 = CanMove(W[0] - 1, W[1] - 1 , ovelhaPos, W, false);
+                    mov3 = CanMove(W[0] + 1, W[1] + 1 , ovelhaPos, W, false);
+                    mov4 = CanMove(W[0] + 1, W[1] - 1 , ovelhaPos, W, false);
+
+                    movTotal = mov1 + mov2 + mov3 + mov4;
+
+                    if(movTotal == 0)
+                    {
+                        Console.WriteLine("As ovelhas ganharam!!");
+                        Metodo.Ins.Sair();
+                    }
+
                     Console.WriteLine("Turno do Lobo");
 
                     WolfMove(board, W, ovelhaPos);
@@ -72,6 +88,12 @@ namespace WolfAndSheep
                 else
                 {
                     Metodo.Ins.PrintBoard(board);
+                    if ( W[0] == 7)
+                    {
+                        Console.WriteLine("O Lobo ganhou!!");
+                        Metodo.Ins.Sair();
+                    }
+                    
                     Console.WriteLine("Turno das Ovelhas");
 
                     sheepMove(board, ovelhaPos, W);
@@ -179,7 +201,7 @@ namespace WolfAndSheep
 
                 if (playerinput == "q")
                 {
-                    move = CanMove(ovelhaPos[ovelha, 0] - 1, ovelhaPos[ovelha,1] - 1 , ovelhaPos, W);
+                    move = CanMove(ovelhaPos[ovelha, 0] - 1, ovelhaPos[ovelha,1] - 1 , ovelhaPos, W, true);
 
                     if (move == 1)
                     {
@@ -192,7 +214,7 @@ namespace WolfAndSheep
                 }
                 else if (playerinput == "e")
                 {
-                    move = CanMove(ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1] + 1 , ovelhaPos, W);
+                    move = CanMove(ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1] + 1 , ovelhaPos, W, true);
 
                     if (move == 1)
                     {
@@ -234,7 +256,7 @@ namespace WolfAndSheep
                 string playerinput = Console.ReadLine();
                 if (playerinput == "e")
                 {
-                    Move = CanMove(W[0] - 1, W[1] + 1 , ovelhaPos, W);
+                    Move = CanMove(W[0] - 1, W[1] + 1 , ovelhaPos, W, true);
 
                     if(Move == 1)
                     {
@@ -247,7 +269,7 @@ namespace WolfAndSheep
                 }
                 else if (playerinput == "q")
                 {
-                    Move = CanMove(W[0] - 1, W[1] - 1 , ovelhaPos, W);
+                    Move = CanMove(W[0] - 1, W[1] - 1 , ovelhaPos, W, true);
 
                     if(Move == 1)
                     {
@@ -262,7 +284,7 @@ namespace WolfAndSheep
 
                 else if (playerinput == "d")
                 {
-                    Move = CanMove(W[0] + 1, W[1] + 1 , ovelhaPos, W);
+                    Move = CanMove(W[0] + 1, W[1] + 1 , ovelhaPos, W, true);
 
                     if (Move == 1)
                     {
@@ -277,7 +299,7 @@ namespace WolfAndSheep
 
                 else if (playerinput == "a")
                 {
-                    Move = CanMove(W[0] + 1, W[1] - 1 , ovelhaPos, W);
+                    Move = CanMove(W[0] + 1, W[1] - 1 , ovelhaPos, W, true);
 
                     if (Move == 1)
                     {
@@ -300,30 +322,43 @@ namespace WolfAndSheep
             } while(ValidAnswer == false);
         }
 
-        private static int CanMove(int Px, int Py, int[,] ovelhaPos, int[] W)
+        private static int CanMove(int Px, int Py, int[,] ovelhaPos, int[] W, bool isMove)
         {
             for (int i = 0; i < 4; i++)
             {
                 if (ovelhaPos[i,0] == Px && ovelhaPos[i,1] == Py)
                 {
-                    Console.WriteLine("Não se pode mover para essa casa");
+                    if(isMove)
+                    {
+                        Console.WriteLine("Não se pode mover para essa casa");
+                    }
+                    
                     return 0;
                 }
             }
             if (Px == W[0] && Py == W[1])
             {
-                Console.WriteLine("Não se pode mover para essa casa");
+                if(isMove)
+                {
+                    Console.WriteLine("Não se pode mover para essa casa");
+                }
                 return 0;
             }
 
             if (Px < 0 || Px > 7)
             {
-                Console.WriteLine("Não se pode mover para essa casa");
+                if(isMove)
+                {
+                    Console.WriteLine("Não se pode mover para essa casa");
+                }
                 return 0;
             }
             if (Py < 0 || Py > 7)
             {
-                Console.WriteLine("Não se pode mover para essa casa");
+                if(isMove)
+                {
+                    Console.WriteLine("Não se pode mover para essa casa");
+                }
                 return 0;
             }
             return 1;
