@@ -4,18 +4,13 @@ namespace WolfAndSheep
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //Inicialização de variáveis
             string[,] board = new string[8,8];
             int[,] ovelhaPos = new int[4,2];
             string playerinput = "";
-            int turns;
-            turns = 0;
-
-            
-
-            
+            int turns = 0;
 
             // Por as ovelas "X" nas suas posições iniciais
             for (int i = 0; i < 8; i++)
@@ -48,7 +43,7 @@ namespace WolfAndSheep
             board[0, 3] = "2";
             board[0, 5] = "3";
             board[0, 7] = "4";
-            PrintBoard(board);
+            Metodo.Ins.PrintBoard(board);
 
             W[1] = WolfInit();
             board[W[0], W[1]] = "W";
@@ -63,23 +58,21 @@ namespace WolfAndSheep
                     }
                 }
             }
-
-
-            // Exemplo de move forwar de uma ovelha 
+ 
             do 
             {
                 if (turns %2 == 0)
                 {
                     //wolf's turn
                     Console.WriteLine("Turno do Lobo");
-                    PrintBoard(board);
+                    Metodo.Ins.PrintBoard(board);
 
                     WolfMove(board, W, ovelhaPos);
                 }
                 else
                 {
                     Console.WriteLine("Turno das Ovelhas");
-                    PrintBoard(board);
+                    Metodo.Ins.PrintBoard(board);
 
                     sheepMove(board, ovelhaPos, W);
 
@@ -87,97 +80,6 @@ namespace WolfAndSheep
                 turns += 1;
 
             }while (playerinput != "sair");
-        }
-        private static void Instructions()
-        {
-            Console.WriteLine("");
-            Console.WriteLine("Regras:");
-            Console.WriteLine("");
-
-            Console.Write("1: O objetivo do lobo e chegar a um dos quadrados ");
-            Console.Write("originais das ovelhas. ");
-            Console.WriteLine("");
-
-            Console.Write("2: O objetivo das ovelhas e ");
-            Console.Write("bloquear o lobo, impedindo-o de chegar a um dos ");
-            Console.Write("seus quadrados originais. ");
-            Console.WriteLine("");
-
-            Console.Write("3: As ovelhas movem-se na ");
-            Console.Write("diagonal e para a frente, um quadrado por turno.");
-            Console.WriteLine("");
-            
-            Console.Write("4: O lobo move-se na diagonal, um quadrado por ");
-            Console.Write("turno, nao so para a frente como as ovelhas, ");
-            Console.Write("como tambem para tras. ");
-            Console.WriteLine("");
-
-            Console.Write("   Isto e, o lobo pode recuar, as ovelhas nao. ");
-            Console.WriteLine("");
-
-            Console.Write("5: O lobo move-se sempre primeiro. No turno das ");
-            Console.WriteLine("");
-
-            Console.Write("6: No turno das ");
-            Console.Write("ovelhas, so e possivel mover uma ovelha.");
-            Console.WriteLine("");
-            
-            Console.Write("7: As pecas so se podem mover para quadrados ");
-            Console.Write("escuros vazios.");
-            Console.WriteLine("");
-
-            Console.Write("8: O lobo vence se chegar a um dos ");
-            Console.Write("quadrados originais das ovelhas. ");
-            Console.WriteLine("");
-
-            Console.Write("9: As ovelhas vencem se bloquearem o lobo de modo");
-            Console.Write(" a que o mesmo não se consiga mover");
-            Console.WriteLine("");
-        }
-      
-        // Output do tabuleiro
-        /// <summary>
-        /// Este método dá print da board
-        /// </summary>
-        /// <param name="board">
-        /// A função recebe a board do jogo atual para a imprimir
-        /// </param>
-        private static void PrintBoard(string[,] board)
-        {
-            Console.Clear();
-            Instructions();
-            for (int i = 0; i < 8; i++)
-            {
-                Console.BackgroundColor = ConsoleColor.DarkGray;
-                Console.ForegroundColor = ConsoleColor.Black;
-                for(int j = 0; j < 8; j++)
-                {
-                    if (i == 0 || i == 2 || i == 4 || i == 6)
-                    {
-                        if (j == 0 || j == 2 || j == 4 || j == 6)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Gray;
-                            Console.ForegroundColor = ConsoleColor.Black;
-                        }
-                    }
-                    else
-                    {
-                        if (j == 1 || j == 3 || j == 5 || j == 7)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Gray;
-                            Console.ForegroundColor = ConsoleColor.Black;
-                        }
-                    }
-                    Console.Write(" {0} ", board[i,j]);
-                    Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.ForegroundColor = ConsoleColor.Black;
-                        
-                
-                    
-                }
-                Console.WriteLine("");
-            }
-            Console.ResetColor();
         }
 
         private static int WolfInit()
@@ -195,7 +97,6 @@ namespace WolfAndSheep
                 {
                     switch (Start)
                     {
-                        
                         case 1:
                             validanswer = true;
                             return 1;
@@ -211,14 +112,13 @@ namespace WolfAndSheep
                         default:
                             Console.WriteLine("Opcao invalida");
                             break;
-                        
                     }
                 }
                 else
                 {
                     if (escolhainicial == "sair")
                     {
-                        Sair();
+                        Metodo.Ins.Sair();
                     }
                     else
                     {
@@ -226,8 +126,7 @@ namespace WolfAndSheep
                     }
                 }
                 
-            }
-            while(validanswer == false);
+            } while(validanswer == false);
   
             return 0;
         }
@@ -235,11 +134,9 @@ namespace WolfAndSheep
 
         private static void sheepMove(string[,] board, int[,] ovelhaPos, int[] W)
         {
-
             string playerinput = "";
             bool validanswer = false;
             int move;
-
             int ovelha;
             string escolhainicial;
             do
@@ -263,12 +160,11 @@ namespace WolfAndSheep
                 {
                     if (escolhainicial == "sair")
                     {
-                        Sair();
+                        Metodo.Ins.Sair();
                     }
                 }
                 
-            }
-            while(validanswer == false);
+            } while(validanswer == false);
             
             validanswer = false;
 
@@ -306,7 +202,7 @@ namespace WolfAndSheep
                 }
                 else if (playerinput == "sair")
                 {
-                    Sair();
+                    Metodo.Ins.Sair();
                 }
                 else
                 {
@@ -390,15 +286,14 @@ namespace WolfAndSheep
                 }
                 else if (playerinput == "sair")
                 {
-                    Sair();
+                    Metodo.Ins.Sair();
                 }
                 else
                 {
                     Console.WriteLine("Opcão invalida");
                 }
                 
-            }
-            while(ValidAnswer == false);
+            } while(ValidAnswer == false);
         }
 
         private static int CanMove(int Px, int Py, int[,] ovelhaPos, int[] W)
@@ -428,11 +323,6 @@ namespace WolfAndSheep
                 return 0;
             }
             return 1;
-        }
-
-        private static void Sair()
-        {
-            System.Environment.Exit(0);
         }
     }
 }
