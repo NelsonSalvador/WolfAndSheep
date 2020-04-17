@@ -75,6 +75,19 @@ namespace Metodo
                             Console.ForegroundColor = ConsoleColor.Black;
                         }
                     }
+                    else if (i == 7)
+                    {
+                        if (j == 0 || j == 2 || j == 4 || j == 6)
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkCyan;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                        else
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                    }
                     else
                     {
                         if (j == 1 || j == 3 || j == 5 || j == 7)
@@ -94,6 +107,19 @@ namespace Metodo
                     if (i == 0 || i == 2 || i == 4 || i == 6)
                     {
                         if (j == 0 || j == 2 || j == 4 || j == 6)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                    }
+                    else if (i == 7)
+                    {
+                        if (j == 0 || j == 2 || j == 4 || j == 6)
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkCyan;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                        else
                         {
                             Console.BackgroundColor = ConsoleColor.Gray;
                             Console.ForegroundColor = ConsoleColor.Black;
@@ -119,6 +145,19 @@ namespace Metodo
                     if (i == 0 || i == 2 || i == 4 || i == 6)
                     {
                         if (j == 0 || j == 2 || j == 4 || j == 6)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                    }
+                    else if (i == 7)
+                    {
+                        if (j == 0 || j == 2 || j == 4 || j == 6)
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkCyan;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
+                        else
                         {
                             Console.BackgroundColor = ConsoleColor.Gray;
                             Console.ForegroundColor = ConsoleColor.Black;
