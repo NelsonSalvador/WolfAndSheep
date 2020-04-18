@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace WolfAndSheep
 {
@@ -32,11 +32,10 @@ namespace WolfAndSheep
             ovelhaPos[0,0] = 7; ovelhaPos[1,0] = 7;
             ovelhaPos[2,0] = 7; ovelhaPos[3,0] = 7;
             
-            ovelhaPos[0,1] = 0;
-            ovelhaPos[1,1] = 2;
-            ovelhaPos[2,1] = 4;
-            ovelhaPos[3,1] = 6;
-
+            //posição y das ovelhas
+            ovelhaPos[0,1] = 0; ovelhaPos[1,1] = 2;
+            ovelhaPos[2,1] = 4; ovelhaPos[3,1] = 6;
+    
             board[ovelhaPos[0,0], ovelhaPos[0,1]] = "S1";
             board[ovelhaPos[1,0], ovelhaPos[1,1]] = "S2";
             board[ovelhaPos[2,0], ovelhaPos[2,1]] = "S3";
@@ -407,4 +406,3 @@ namespace WolfAndSheep
             return 1;
         }
     }
-}
