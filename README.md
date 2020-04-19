@@ -15,7 +15,8 @@ Pedro Coutinho:
 - Melhoramento do sistema de prints
 - Método para sair do programa
 - Sistema final de movimento das ovelhas
-- sistema final de movimento do lobo
+- Sistema final de movimento do lobo
+- Correção de bugs
 
 Miguel Martinho:
 - Fluxograma
