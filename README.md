@@ -15,7 +15,7 @@ Pedro Coutinho:
 - Melhoramento do sistema de prints
 - Método para sair do programa
 - Sistema final de movimento das ovelhas
-- Sistema final de movimento do lobo
+- sistema final de movimento do lobo
 - Correção de bugs
 
 Miguel Martinho:
@@ -33,9 +33,19 @@ não tinhamos criado métodos nenhuns. Depois começamos a expandir o movimento 
 ovelhas e a colocar os diferentes sistemas em métodos. 
 
 Utilizámos um array bidimensional de strings para o board para as conseguirmos
-desenhar o board e as peças. E criámos dois array para guardar a posição de cada 
-uma das peças, um para o lobo outro para as ovelhas.
+desenhar o board e as peças. E criámos dois arrays para guardar a posição de 
+cada uma das peças, um para o lobo outro para as ovelhas.
 
 Fomos expandindo cada um dos métodos e criando o movimento do lobo muito baseado
 no das ovelhas. Criámos o método CanMove para fazer a verificação se a peça
-selecionada se podia mexer para o a posição pedida. []
+selecionada se podia mexer para o a posição pedida.
+
+Depois para terminar adicionámos a condição de vitória antes de cada jogador
+jogar.
+
+Métodos Move, utilizão if's dentro de um ciclo do while para receber os vários
+inputs do jogador recebem as posições atuais da peça que se pretende mover,
+recebem input direcional do jogador, enviam essa informação para a o método 
+CanMove que compara as coordenadas recebidas com as outras peças e com as
+bordas do mapa
+
