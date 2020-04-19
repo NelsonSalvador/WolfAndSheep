@@ -10,11 +10,11 @@ namespace Metodo
             Console.WriteLine("Regras:");
             Console.WriteLine("");
 
-            Console.Write("1: O objetivo do lobo e chegar a um dos quadrados ");
-            Console.Write("originais das ovelhas. ");
+            Console.Write("1: O objetivo do lobo (|_) e chegar a um dos quadr");
+            Console.Write("ados originais das ovelhas (Quadrados azuis). ");
             Console.WriteLine("");
 
-            Console.Write("2: O objetivo das ovelhas e ");
+            Console.Write("2: O objetivo das ovelhas (O1, O2, O3, O4) e ");
             Console.Write("bloquear o lobo, impedindo-o de chegar a um dos ");
             Console.Write("seus quadrados originais. ");
             Console.WriteLine("");
@@ -31,7 +31,7 @@ namespace Metodo
             Console.Write("   Isto e, o lobo pode recuar, as ovelhas nao. ");
             Console.WriteLine("");
 
-            Console.Write("5: O lobo move-se sempre primeiro. No turno das ");
+            Console.Write("5: O lobo move-se sempre primeiro.");
             Console.WriteLine("");
 
             Console.Write("6: No turno das ");
@@ -42,13 +42,6 @@ namespace Metodo
             Console.Write("escuros vazios.");
             Console.WriteLine("");
 
-            Console.Write("8: O lobo vence se chegar a um dos ");
-            Console.Write("quadrados originais das ovelhas. ");
-            Console.WriteLine("");
-
-            Console.Write("9: As ovelhas vencem se bloquearem o lobo de modo");
-            Console.Write(" a que o mesmo não se consiga mover");
-            Console.WriteLine("");
         }   
         // Output do tabuleiro
         /// <summary>

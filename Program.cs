@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace WolfAndSheep
 {
@@ -32,14 +32,15 @@ namespace WolfAndSheep
             ovelhaPos[0,0] = 7; ovelhaPos[1,0] = 7;
             ovelhaPos[2,0] = 7; ovelhaPos[3,0] = 7;
             
-            //posição y das ovelhas
-            ovelhaPos[0,1] = 0; ovelhaPos[1,1] = 2;
-            ovelhaPos[2,1] = 4; ovelhaPos[3,1] = 6;
-    
-            board[ovelhaPos[0,0], ovelhaPos[0,1]] = "S1";
-            board[ovelhaPos[1,0], ovelhaPos[1,1]] = "S2";
-            board[ovelhaPos[2,0], ovelhaPos[2,1]] = "S3";
-            board[ovelhaPos[3,0], ovelhaPos[3,1]] = "S4";
+            ovelhaPos[0,1] = 0;
+            ovelhaPos[1,1] = 2;
+            ovelhaPos[2,1] = 4;
+            ovelhaPos[3,1] = 6;
+
+            board[ovelhaPos[0,0], ovelhaPos[0,1]] = "O1";
+            board[ovelhaPos[1,0], ovelhaPos[1,1]] = "O2";
+            board[ovelhaPos[2,0], ovelhaPos[2,1]] = "O3";
+            board[ovelhaPos[3,0], ovelhaPos[3,1]] = "O4";
             board[0, 1] = "01";
             board[0, 3] = "02";
             board[0, 5] = "03";
@@ -47,16 +48,16 @@ namespace WolfAndSheep
             Metodo.Ins.PrintBoard(board);
 
             W[1] = WolfInit();
-            board[W[0], W[1]] = "VV";
+            board[W[0], W[1]] = "|_";
 
             //esvazia as casas onde não estão peças
             for (int i = 0; i < 8; i++)
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    if ( board[i, j] != "VV" && 
-                    board[i, j] != "S1" && board[i, j] != "S2" && 
-                    board[i, j] != "S3" && board[i, j] != "S4" )
+                    if ( board[i, j] != "|_" && 
+                    board[i, j] != "O1" && board[i, j] != "O2" && 
+                    board[i, j] != "O3" && board[i, j] != "O4" )
                     {
                         board[i, j] = "  ";
                     }
@@ -181,6 +182,7 @@ namespace WolfAndSheep
         {
             string playerinput = "";
             bool validanswer = false;
+            bool validPlay = false;
             int move;
             int ovelha;
             string escolhainicial;
@@ -189,6 +191,7 @@ namespace WolfAndSheep
             {
                 do
                 {
+                    validanswer = false;
                     Console.WriteLine("Qual ovelha se vai mexer?");
                     //Pergunta ao jogador qual a ovelha que quer mexer
                     escolhainicial = Console.ReadLine();
@@ -202,63 +205,74 @@ namespace WolfAndSheep
                             validanswer = true;
                         }
                         else
-                        {
+                        {     
                             Console.WriteLine("Opcao invalida");
                         }
+                        
+                    }
+                    else if (escolhainicial == "sair")
+                    {
+                        Metodo.Ins.Sair();
                     }
                     else
                     {
-                        if (escolhainicial == "sair")
-                        {
-                            Metodo.Ins.Sair();
-                        }
+                        Console.WriteLine("Opcao invalida");
                     }
+                    
                     
                 } while(validanswer == false);
 
-                msg = "S"+ (ovelha + 1).ToString();                
+                msg = "O"+ (ovelha + 1).ToString();                
                 validanswer = false;
-
-                //Mexer a ovelha
-                Console.WriteLine("Para onde se vai mexer a ovelha?");
-                playerinput = Console.ReadLine();
-
-                if (playerinput == "q")
+                do
                 {
-                    move = CanMove(ovelhaPos[ovelha, 0] - 1, ovelhaPos[ovelha,1] - 1 , ovelhaPos, W, true);
+                    //Mexer a ovelha
+                    Console.WriteLine("Para onde se vai mexer a ovelha?");
+                    Console.WriteLine("Cima/Esquerda: q | Cima/Direita: e ");
+                    playerinput = Console.ReadLine();
 
-                    if (move == 1)
+                    if (playerinput == "q")
                     {
-                        board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = "  ";
-                        board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]-1] = msg;
-                        ovelhaPos[ovelha,0] -= 1;
-                        ovelhaPos[ovelha,1] -= 1;
+                        move = CanMove(ovelhaPos[ovelha, 0] - 1, ovelhaPos[ovelha,1] - 1 , ovelhaPos, W, true);
+
+                        if (move == 1)
+                        {
+                            board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = "  ";
+                            board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]-1] = msg;
+                            ovelhaPos[ovelha,0] -= 1;
+                            ovelhaPos[ovelha,1] -= 1;
+                            validPlay = true;
+                        }
                         validanswer = true;
                     }
-                }
-                else if (playerinput == "e")
-                {
-                    move = CanMove(ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1] + 1 , ovelhaPos, W, true);
-
-                    if (move == 1)
+                    else if (playerinput == "e")
                     {
-                        board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = "  ";
-                        board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]+1] =  msg;
-                        ovelhaPos[ovelha,0] -= 1;
-                        ovelhaPos[ovelha,1] += 1;
-                        validanswer = true;
-                    }                    
-                }
-                else if (playerinput == "sair")
-                {
-                    Metodo.Ins.Sair();
-                }
-                else
-                {
-                    Console.WriteLine("Opcão invalida");
-                }
+                        move = CanMove(ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1] + 1 , ovelhaPos, W, true);
+
+                        if (move == 1)
+                        {
+                            board[ovelhaPos[ovelha,0], ovelhaPos[ovelha,1]] = "  ";
+                            board[ovelhaPos[ovelha,0] - 1, ovelhaPos[ovelha,1]+1] =  msg;
+                            ovelhaPos[ovelha,0] -= 1;
+                            ovelhaPos[ovelha,1] += 1;
+                            validPlay = true;
+                        }
+                        validanswer = true;                   
+                    }
+                    else if (playerinput == "sair")
+                    {
+                        Metodo.Ins.Sair();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Opcão invalida");
+                    }
+                    
+                } while(validanswer == false);
+                
+                
             }
-            while(validanswer == false);
+            while(validPlay == false);
            
         }
         /// <summary>
@@ -288,7 +302,7 @@ namespace WolfAndSheep
                     if(Move == 1)
                     {
                         board[W[0], W[1]] = "  ";
-                        board[W[0] - 1, W[1] + 1] = "VV";
+                        board[W[0] - 1, W[1] + 1] = "|_";
                         W[0] -= 1;
                         W[1] += 1;
                         ValidAnswer = true;
@@ -301,7 +315,7 @@ namespace WolfAndSheep
                     if(Move == 1)
                     {
                         board[W[0], W[1]] = "  ";
-                        board[W[0] - 1, W[1] - 1] = "VV";
+                        board[W[0] - 1, W[1] - 1] = "|_";
                         W[0] -= 1;
                         W[1] -= 1;
                         ValidAnswer = true;
@@ -316,7 +330,7 @@ namespace WolfAndSheep
                     if (Move == 1)
                     {
                         board[W[0], W[1]] = "  ";
-                        board[W[0] + 1, W[1] + 1] = "VV";
+                        board[W[0] + 1, W[1] + 1] = "|_";
                         W[0] += 1;
                         W[1] += 1;
                         ValidAnswer = true;
@@ -331,7 +345,7 @@ namespace WolfAndSheep
                     if (Move == 1)
                     {
                         board[W[0], W[1]] = "  ";
-                        board[W[0] + 1, W[1] - 1] = "VV";
+                        board[W[0] + 1, W[1] - 1] = "|_";
                         W[0] += 1;
                         W[1] -= 1;
                         ValidAnswer = true;
@@ -406,3 +420,4 @@ namespace WolfAndSheep
             return 1;
         }
     }
+}
